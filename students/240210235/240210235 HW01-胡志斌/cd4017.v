@@ -1,7 +1,6 @@
-module count_16(clk,reset,out);
+module count_10(clk,reset,out);
 		input clk, reset;		
-		output[9:0] out;		
-		reg[3:0] out;		
+	output reg [3:0] out ;			
 		always@(posedge clk)	
 		begin
 			if(reset)			
@@ -9,6 +8,6 @@ module count_16(clk,reset,out);
 			else if(out == 4'd9)
 				out <= 4'b0000;
 			else
-				out <= out +1;
+				out <= out +1'b1;
 		end
 endmodule
