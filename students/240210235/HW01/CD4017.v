@@ -1,14 +1,13 @@
-module count_16(clk,reset,out);
-		input clk, reset;		
-		output reg [3:0] out ;		
-				
-		always@(posedge clk)	
-		begin
-			if(reset)			
-				out <= 4'b0000;	
-			else if(out == 4'd9)
-				out <= 4'b0000;
-			else
-				out <= out +1'b1;
-		end
+module cd4017(clk,en,clr,q);
+	input clk,en,clr;
+	output[9:0] q;
+	reg[9:0] q;
+	
+	always@(posedge clk or posedge clr)
+	begin
+		if(clr)
+			q<=10'b0000000001;
+		else if(en)
+			q<={q[8:0],q[9]};
+	end
 endmodule
