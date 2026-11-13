@@ -1,18 +1,23 @@
-module test16;
+module top_tb;
 	wire clk;
+	reg en;
+	reg clr;
+	wire[9:0] q;
+	
 	clk_gen u_clk(clk);
-	reg reset;
-	wire[3:0] out;
-	count_16 u_count(clk,reset,out);
+	cd4017 u_cd4017(clk,en,clr,q);
 	
 	initial
 	begin
-		$dumpfile("done");
+		$dumpfile("top_tb.vcd");
 		$dumpvars();
-		reset = 1;
-		#30 reset = 0;
-		#360 reset = 1;
-		#400 $finish();
+		en=1;
+		clr=1;
+		#25 clr=0;
+		#180 en=0;
+		#70 en=1;
+		#70 clr=1;
+		#20 clr=0;
+		#50 $finish();
 	end
-	
 endmodule
